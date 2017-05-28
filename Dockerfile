@@ -20,8 +20,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    
-RUN apt-get install -y python-software-properties
 
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
