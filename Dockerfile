@@ -2,8 +2,15 @@ FROM nvidia/cuda:7.0-cudnn4-devel-ubuntu14.04
 
 MAINTAINER Craig Citro <craigcitro@google.com>
 
+RUN apt-get install -y build-essential \
+        python-dev \
+        python-software-properties \
+        software-properties-common
+
+RUN add-apt-repository ppa:openjdk-r/ppa
+RUN apt-get update
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
         curl \
         git \
         libcurl3-dev \
@@ -11,9 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libpng12-dev \
         libzmq3-dev \
         pkg-config \
-        python-dev \
         rsync \
-        software-properties-common \
         unzip \
         zip \
         zlib1g-dev \
