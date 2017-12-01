@@ -10,13 +10,13 @@ RUN apt-get install -y \
   build-essential \
   git \
   libopenblas-dev \
+  liblapack-dev \
   libopencv-dev \
   python-dev \
-  python-numpy \
-  python-scipy \
   python-setuptools \
   wget \
-  unzip
+  vim \
+  unzip \
 
 # install ipython
 # install jupyter
@@ -27,6 +27,16 @@ RUN pip install \
   scipy \
   matplotlib
 RUN pip install -U scikit-image
+
+# Clone MXNet repo and move into it
+RUN cd /root && git clone --recursive https://github.com/apache/incubator-mxnet.git && cd mxnet && \
+  cd mxnet && \
+  make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1 && \
+  cd python && pip install -e .
+
+RUN apt-get install -y graphviz
+RUN pip install graphviz
+
 # expose 8888 as jupyter's default
 EXPOSE 8888
 
