@@ -16,7 +16,7 @@ RUN apt-get install -y \
   python-setuptools \
   wget \
   vim \
-  unzip \
+  unzip
 
 # install ipython
 # install jupyter
